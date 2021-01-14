@@ -12,7 +12,14 @@ class Controller():
         pass
     
     def select_all_records(self):
-        pass
+        records = self.db.select_all_records(self.table)
+        models = []
+        
+        for record in records:
+            model = self.record_to_model(record)
+            models.append(model)
+        
+        return models
     
     def select_records_with_condition(self, column, value):
         pass
