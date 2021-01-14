@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+
+    <meta charset="UTF-8"> {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>GDgoodZ Trading</title>
+    {% endif %}
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gdgoodz/gdgoodz.css') }}"> {% block css %} {% endblock %}
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/jquery/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap/bootstrap.js') }}"></script>
+    {% block scripts %} {% endblock %}
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <!-- BRAND -->
+        <a href="/index" class="navbar-brand">GDgoodZ Trading</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- CONTENT -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+
+            <!-- LEFT -->
+            <ul class="navbar-nav mr-auto">
+
+                <!-- OVERVIEW -->
+                <li class="nav-item">
+                    <a href="/overview" class="nav-link">Overview</a>
+                </li>
+
+                <!-- PRODUCTS -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="productsDropdown" role="button" data-toggle="dropdown">Products</a>
+                    <div class="dropdown-menu">
+                        <a href="/products/inventory" class="dropdown-item">Inventory</a>
+                        <a href="/products/new" class="dropdown-item">New</a>
+                        <a href="/products/out_of_stock" class="dropdown-item">Out of Stock</a>
+                        <a href="/products/unlisted" class="dropdown-item">Unlisted</a>
+                        <a href="/products/incoming" class="dropdown-item">Incoming</a>
+                    </div>
+                </li>
+
+                <!-- ORDERS -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="ordersDropdown" role="button" data-toggle="dropdown">Orders</a>
+                    <div class="dropdown-menu">
+                        <a href="/orders/pending" class="dropdown-item">Pending</a>
+                        <a href="/orders/new" class="dropdown-item">New</a>
+                        <a href="/orders/completed" class="dropdown-item">Completed</a>
+                        <a href="/orders/cancelled" class="dropdown-item">Cancelled</a>
+                    </div>
+                </li>
+
+                <!-- SALES -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="salesDropdown" role="button" data-toggle="dropdown">Sales</a>
+                    <div class="dropdown-menu">
+                        <a href="/sales/pending" class="dropdown-item">Pending</a>
+                        <a href="/sales/new" class="dropdown-item">New</a>
+                        <a href="/sales/completed" class="dropdown-item">Completed</a>
+                        <a href="/sales/cancelled" class="dropdown-item">Cancelled</a>
+                    </div>
+                </li>
+
+                <!-- SUPPLIERS -->
+                <li class="nav-item">
+                    <a href="/suppliers" class="nav-link">Suppliers</a>
+                </li>
+
+                <!-- CLIENTS -->
+                <li class="nav-item">
+                    <a href="/clients" class="nav-link">Clients</a>
+                </li>
+
+                <!-- FINANCES -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="financesDropdown" role="button" data-toggle="dropdown">Finances</a>
+                    <div class="dropdown-menu">
+                        <a href="/finances/budget" class="dropdown-item">Budget</a>
+                        <a href="/finances/revenue" class="dropdown-item">Revenue</a>
+                        <a href="/finances/expenses" class="dropdown-item">Expenses</a>
+                        <a href="/finances/other" class="dropdown-item">Other</a>
+                    </div>
+                </li>
+
+                <!-- REPORTS -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="reportsDropdown" role="button" data-toggle="dropdown">Reports</a>
+                    <div class="dropdown-menu">
+                        <a href="/reports/spreadsheets" class="dropdown-item">Spreadsheets</a>
+                        <a href="/reports/visuals" class="dropdown-item">Visuals</a>
+                        <a href="/reports/balance_sheet" class="dropdown-item">Balance Sheet</a>
+                    </div>
+                </li>
+
+                <!-- CALCULATORS -->
+                <li class="nav-item">
+                    <a href="/calculators" class="nav-link">Calculators</a>
+                </li>
+
+                <!-- SETTINGS -->
+                <li class="nav-item">
+                    <a href="/settings" class="nav-link">Settings</a>
+                </li>
+
+            </ul>
+
+            <!-- RIGHT -->
+            <ul class="navbar-nav ml-auto">
+                {% if session.username %}
+                <li class="nav-item">
+                    <a href="/profile" class="nav-link">{{ session.username }}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/auth/logout" class="nav-link">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="/auth/register" class="nav-link">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/auth/login" class="nav-link">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- PAGE SPECIFIC CONTENT -->
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <h1 class="top-heading">{{ top_heading_txt }}</h1>
+            <h2 class="text-muted secondary-heading">{{ secondary_heading_txt }}</h2>
+            <hr>
+        </div>
+
+        <!-- CONTENT BLOCK -->
+        {% block content %} {% endblock %}
+    </div>
+
+</body>
+
+</html>

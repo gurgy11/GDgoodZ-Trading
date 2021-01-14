@@ -1,0 +1,88 @@
+{% extends 'base.html' %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/products/inventory.js') }}"></script>
+{% endblock %} {% block content %}
+
+<div class="top-btns-container container">
+    <div class="row">
+        <div class="col">
+            <button type="button" id="createNewBtn" class="btn btn-primary form-control">Create New</button>
+        </div>
+        <div class="col">
+            <button type="button" id="xlsxBtn" class="btn btn-success form-control">Export to XLSX (*.xlsx)</button>
+        </div>
+        <div class="col">
+            <button type="button" id="csvBtn" class="btn btn-warning form-control">Export to CSV (*.csv)</button>
+        </div>
+        <div class="col">
+            <button type="button" id="jsonBtn" class="btn btn-danger form-control">Export to JSON (*.json)</button>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="table-container">
+    <div class="table-heading">
+        <h3 class="table-header">Inventory Table View</h3>
+    </div>
+    <table id="productsInventoryTable" class="gd-table table table-responsive">
+        <thead class="gd-thead">
+            <tr>
+                {% if columns %} {% for column in columns %}
+                <th>{{ column }}</th>
+                {% endfor %} {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Load product records here -->
+            {% if rows %} {% for row in rows %}
+            <tr>
+                {% for field in row %}
+                <td>{{ field }}</td>
+                {% endfor %}
+                <td>
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="table-btn view-btn btn btn-outline-primary form-control">View</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="table-btn edit-btn btn btn-outline-warning form-control" value="{{ row[0] }}">Edit</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="table-btn delete-btn btn btn-outline-danger form-control" value="{{ row[0] }}">Delete</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %} {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Create New Button
+    $('#createNewBtn').on('click', function() {
+        window.location.href = '/products/create';
+    });
+
+    // Export to XLSX Button
+    $('#xlsxBtn').on('click', function() {
+        window.location.href = '/products/export/xlsx';
+    });
+
+    // Export to CSV Button
+    $('#csvBtn').on('click', function() {
+        window.location.href = '/products/export/csv';
+    });
+
+    // Export to JSON Button
+    $('#jsonBtn').on('click', function() {
+        window.location.href = '/products/export/json';
+    });
+</script>
+
+{% endblock %}

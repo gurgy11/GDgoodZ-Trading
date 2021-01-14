@@ -1,0 +1,143 @@
+{% extends 'base.html' %} {% block content %}
+
+<!-- EDIT PRODUCT FORM -->
+<h3>Edit an existing product</h3>
+<hr>
+<div class="errors-container">
+    {% if errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for error in errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+<hr>
+<form method="POST" id="editProductForm" class="gd-form">
+
+    <!-- NAME -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <label for="name">Name (*)</label>
+                <input type="text" name="name" class="form-control" placeholder="Enter the product's name..." value="{{ product.name }}" required>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATEGORY -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <label for="category">Category (*)</label>
+                <input type="text" name="category" class="form-control" placeholder="Enter the product's category..." value="{{ product.category }}" required>
+            </div>
+        </div>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <label for="description">Description</label>
+                <textarea name="description" class="form-control" placeholder="Enter the product's description and details...">{{ product.description }}</textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- SKU / STATUS / SUPPLIER -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <label for="sku">SKU (*)</label>
+                <input type="text" name="sku" class="form-control" placeholder="Enter the product's SKU..." value="{{ product.sku }}" required>
+            </div>
+            <div class="col">
+                <label for="status">Status (*)</label>
+                <select name="status" class="form-control">
+                    <option value="{{ product.status }}" selected>{{ product.status }}</option>
+                    <option value="In Stock">In Stock</option>
+                    <option value="New">New</option>
+                    <option value="Out of Stock">Out of Stock</option>
+                    <option value="Unlisted">Unlisted</option>
+                    <option value="Incoming">Incoming</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="supplier">Supplier</label>
+                <input type="text" name="supplier" class="form-control" placeholder="Enter the product's supplier..." value="{{ product.supplier }}">
+            </div>
+        </div>
+    </div>
+
+    <!-- COUNTRY OF ORIGIN -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <label for="country_of_origin">Country of Origin</label>
+                <input type="text" name="country_of_origin" class="form-control" placeholder="Enter the product's country of origin..." value="{{ product.country_of_origin }}">
+            </div>
+        </div>
+    </div>
+
+    <!-- QUANTITY / QUANTITY SOLD -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <label for="quantity">Quantity (*)</label>
+                <input type="number" step="1" name="quantity" class="form-control" placeholder="Enter the quantity of this product..." value="{{ product.quantity }}" required>
+            </div>
+            <div class="col">
+                <label for="quantity_sold">Quantity Sold</label>
+                <input type="number" step="1" name="quantity_sold" class="form-control" placeholder="Enter the quantity sold..." value="{{ product.quantity_sold }}">
+            </div>
+        </div>
+    </div>
+
+    <!-- COST PER UNIT / PRICE PER UNIT -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <label for="cost_per_unit">Cost Per Unit</label>
+                <input type="number" step="0.01" name="cost_per_unit" class="form-control" placeholder="Enter the cost per unit..." value="{{ product.cost_per_unit }}">
+            </div>
+            <div class="col">
+                <label for="price_per_unit">Price Per Unit</label>
+                <input type="number" step="0.01" name="price_per_unit" class="form-control" placeholder="Enter the price per unit..." value="{{ product.price_per_unit }}">
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <label for="notes">Notes</label>
+                <textarea name="notes" class="form-control" placeholder="Enter any important notes about the product here...">{{ product.notes }}</textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary form-control">Update</button>
+            </div>
+            <div class="col">
+                <button type="button" id="backBtn" class="btn btn-danger form-control">Back</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    $('#backBtn').on('click', function() {
+        window.location.href = '/products/inventory';
+    });
+</script>
+
+{% endblock %}

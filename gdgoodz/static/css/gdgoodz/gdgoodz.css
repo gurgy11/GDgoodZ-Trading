@@ -1,0 +1,17 @@
+.gd-table thead th {
+    font-size: 14px;
+}
+
+.gd-table tbody td {
+    font-size: 12px;
+    max-height: 20px;
+}
+
+.table-btn {
+    font-size: 12px;
+}
+
+.edit-btn {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

@@ -1,0 +1,3 @@
+graft gdgoodz/static
+graft gdgoodz/templates
+global-exclude *.pyc
