@@ -2,6 +2,7 @@ from flask import Blueprint, request, render_template, redirect, url_for, send_f
 from . import ProductController
 from .table import ProductTable
 from gdgoodz.lib.middleware import login_required
+from gdgoodz.lib.creator import ExcelCreator
 
 bp = Blueprint('products', __name__)
 controller = ProductController()
@@ -77,15 +78,15 @@ def incoming():
 @bp.route('/products/export/xlsx')
 @login_required
 def export_xlsx():
-    ''' Starts a download of the product inventory in an XLSX file '''
+    ''' Create an excel file of the product inventory and send the file for download '''
     
     product_models = controller.select_all_products()
     product_dicts = controller.product_models_to_dict(product_models)
     
-    products_df = controller.product_dicts_to_dataframe(product_dicts)
-    file_path = controller.products_dataframe_to_excel(products_df)
+    xl_creator = ExcelCreator(product_dicts, 'products')
+    filename = xl_creator.create_excel_file()
     
-    return send_file(file_path, as_attachment=True)
+    return send_file(filename, as_attachment=True)
 
 @bp.route('/products/export/csv')
 @login_required
