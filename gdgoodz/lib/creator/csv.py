@@ -5,7 +5,7 @@ from . import Creator
 from gdgoodz.definitions import *
 
 
-class CSVCreator():
+class CSVCreator(Creator):
     
     def __init__(self, dictionaries, module_name):
         super().__init__(dictionaries, module_name)
@@ -19,7 +19,7 @@ class CSVCreator():
     
     def generate_unique_filename(self):
         name = "{module_name}__{now}__{file_id}.csv".format(module_name=self.module_name, now=datetime.now(), 
-                                                            file_id=self.NumberGenerator.generate_file_id())
+                                                            file_id=self.number_generator.generate_file_id())
         filename = os.path.join(self.export_dir, name)
         
         return filename
@@ -28,6 +28,6 @@ class CSVCreator():
         df = self.create_dataframe()
         filename = self.generate_unique_filename()
         
-        df.to_csv()
+        df.to_csv(filename)
         
         return filename

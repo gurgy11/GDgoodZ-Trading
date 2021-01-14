@@ -19,5 +19,5 @@ class Creator():
     def generate_unique_filename(self, file_type):
         pass
     
-    def create_file(pass):
+    def create_file(self):
         pass

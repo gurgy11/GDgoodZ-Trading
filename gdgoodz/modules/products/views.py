@@ -2,7 +2,7 @@ from flask import Blueprint, request, render_template, redirect, url_for, send_f
 from . import ProductController
 from .table import ProductTable
 from gdgoodz.lib.middleware import login_required
-from gdgoodz.lib.creator import ExcelCreator
+from gdgoodz.lib.creator import ExcelCreator, CSVCreator, JSONCreator
 
 bp = Blueprint('products', __name__)
 controller = ProductController()
@@ -84,7 +84,7 @@ def export_xlsx():
     product_dicts = controller.product_models_to_dict(product_models)
     
     xl_creator = ExcelCreator(product_dicts, 'products')
-    filename = xl_creator.create_excel_file()
+    filename = xl_creator.create_file()
     
     return send_file(filename, as_attachment=True)
 
@@ -93,7 +93,13 @@ def export_xlsx():
 def export_csv():
     ''' Exports the inventory of products in a CSV file '''
     
-    pass
+    product_models = controller.select_all_products()
+    product_dicts = controller.product_models_to_dict(product_models)
+    
+    csv_creator = CSVCreator(product_dicts, 'products')
+    filename = csv_creator.create_file()
+    
+    return send_file(filename, as_attachment=True)
 
 
 @bp.route('/products/export/json')
@@ -101,7 +107,13 @@ def export_csv():
 def export_json():
     ''' Exports the inventory of products as a JSON file '''
     
-    pass
+    product_models = controller.select_all_products()
+    product_dicts = controller.product_models_to_dict(product_models)
+    
+    json_creator = JSONCreator(product_dicts, 'products')
+    filename = json_creator.create_file()
+    
+    return send_file(filename, as_attachment=True)
 
 
 @bp.route('/products/create', methods=['GET', 'POST'])
