@@ -41,4 +41,8 @@ def create_app(test_config=None):
     app.register_blueprint(product_bp)
     app.add_url_rule('/', endpoint='products')
     
+    from gdgoodz.modules.suppliers import supplier_bp
+    app.register_blueprint(supplier_bp)
+    app.add_url_rule('/', endpoint='suppliers')
+    
     return app

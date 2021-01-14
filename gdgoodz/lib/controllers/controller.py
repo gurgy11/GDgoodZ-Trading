@@ -11,6 +11,12 @@ class Controller():
     def record_to_model(self, record):
         pass
     
+    def form_to_model(self, form):
+        pass
+    
+    def form_to_values(self, form):
+        pass
+    
     def select_all_records(self):
         records = self.db.select_all_records(self.table)
         models = []
@@ -37,6 +43,9 @@ class Controller():
         pass
     
     def validate_form(self, form):
+        pass
+    
+    def form_to_model(self, form):
         pass
     
     def models_to_dictionaries(self, models):
