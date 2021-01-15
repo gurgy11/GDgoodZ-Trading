@@ -15,3 +15,11 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.calculator-row {
+    margin-bottom: 20px;
+}
+
+.card {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}

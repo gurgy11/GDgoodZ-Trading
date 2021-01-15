@@ -1,3 +1,4 @@
+import re
 from . import ProductModel
 from gdgoodz.lib.database import Database
 from datetime import datetime
@@ -175,3 +176,14 @@ class ProductController():
         products_df.to_excel(file_path)
         
         return file_path
+    
+    def search(self, search_term):
+        products = self.select_all_products()
+        matches = []
+        
+        for p in products:
+            p_dict = p.to_dict()
+            if search_term.lower() in p_dict.get('name').lower():
+                matches.append(p_dict)
+                        
+        return matches

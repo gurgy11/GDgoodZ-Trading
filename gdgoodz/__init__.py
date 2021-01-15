@@ -45,4 +45,12 @@ def create_app(test_config=None):
     app.register_blueprint(supplier_bp)
     app.add_url_rule('/', endpoint='suppliers')
     
+    from gdgoodz.modules.calculators import calculators_bp
+    app.register_blueprint(calculators_bp)
+    app.add_url_rule('/', endpoint='calculators')
+    
+    from gdgoodz.modules.orders import orders_bp
+    app.register_blueprint(orders_bp)
+    app.add_url_rule('/', endpoint='orders')
+    
     return app

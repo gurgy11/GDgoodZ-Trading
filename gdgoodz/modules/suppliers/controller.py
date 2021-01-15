@@ -54,6 +54,9 @@ class SupplierController(Controller):
         
         return None
     
+    def delete_record(self, record_id):
+        self.db.delete_existing_record(self.table, record_id)
+    
     def validate_form(self, form):
         errors = []
         

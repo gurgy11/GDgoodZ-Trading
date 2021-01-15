@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect, url_for, send_file
+from flask import Blueprint, request, render_template, redirect, url_for, send_file, jsonify
 from gdgoodz.lib.middleware import login_required
 from . import SupplierController, SupplierTable
 
@@ -66,3 +66,29 @@ def edit(supplier_id):
     
     return render_template('suppliers/edit.html', title='GDgoodZ Trading - Edit Supplier', top_heading_txt='Suppliers - Edit', 
                            secondary_heading_txt='Use the form below to edit and update a supplier!', supplier=supplier)
+
+
+@bp.route('/suppliers/delete/<supplier_id>')
+@login_required
+def delete(supplier_id):
+    controller.delete_record(supplier_id)
+    return redirect(url_for('suppliers.index'))
+
+
+# TODO: Export routes
+
+
+''' Fetch JSON data routes '''
+
+
+@bp.route('/suppliers/fetchall')
+def fetchall():
+    suppliers = controller.select_all_records()
+    supplier_dicts = []
+    
+    for s in suppliers:
+        s_dict = s.to_dict()
+        supplier_dicts.append(s_dict)
+        
+    print(supplier_dicts)
+    return jsonify(supplier_dicts)

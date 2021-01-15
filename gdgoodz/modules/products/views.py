@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect, url_for, send_file
+from flask import Blueprint, request, render_template, redirect, url_for, send_file, jsonify
 from . import ProductController
 from .table import ProductTable
 from gdgoodz.lib.middleware import login_required
@@ -173,3 +173,12 @@ def delete(product_id):
     controller.delete_product(product_id)
     
     return redirect(url_for('products.inventory'))
+
+
+''' Fetch JSON routes '''
+
+
+@bp.route('/products/search/<search_term>')
+def search(search_term):
+    products = controller.search(search_term)
+    return jsonify(products)

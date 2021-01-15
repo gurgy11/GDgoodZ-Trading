@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/calculators/index.js') }}"></script>
+{% endblock %} {% block content %}
+<div class="calculator-container">
+    <div class="row">
+        <div class="col">
+            <h3>Calculate final cost per unit</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row calculator-row">
+        <div class="col">
+            <label for="cost_per_unit">Cost per unit</label>
+        </div>
+        <div class="col">
+            <input type="number" step="0.01" id="costPerUnit" class="form-control">
+        </div>
+    </div>
+    <div class="row calculator-row">
+        <div class="col">
+            <label for="order_quantity">Order quantity</label>
+        </div>
+        <div class="col">
+            <input type="number" step="1" id="orderQuantity" class="form-control">
+        </div>
+    </div>
+    <div class="row calculator-row">
+        <div class="col">
+            <label for="shipping_cost">Shipping cost</label>
+        </div>
+        <div class="col">
+            <input type="number" step="0.01" id="shippingCost" class="form-control">
+        </div>
+    </div>
+    <div class="row calculator-row">
+        <div class="col"></div>
+        <div class="col">
+            <button type="button" id="calcFinalCostBtn" class="btn btn-primary form-control">Calculate</button>
+        </div>
+    </div>
+    <div class="row calculator-row">
+        <div class="col">
+            <label for="final_cost_per_unit">Final cost per unit</label>
+        </div>
+        <div class="col">
+            <h5 id="finalCostPerUnit">---</h5>
+        </div>
+    </div>
+</div>
+{% endblock %}
