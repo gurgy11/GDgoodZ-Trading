@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    // #### TODO: Get the form to submit with dynamic elements
+
     var ids_arr = Array();
     var products_arr = Array();
     var quantities_arr = Array();
