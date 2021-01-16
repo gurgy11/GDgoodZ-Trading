@@ -90,5 +90,4 @@ def fetchall():
         s_dict = s.to_dict()
         supplier_dicts.append(s_dict)
         
-    print(supplier_dicts)
     return jsonify(supplier_dicts)

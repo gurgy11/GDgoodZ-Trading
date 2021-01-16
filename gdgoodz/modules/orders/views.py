@@ -15,5 +15,11 @@ def index():
 @bp.route('/orders/create', methods=['GET', 'POST'])
 @login_required
 def create():
+    
+    if request.method == 'POST':
+        supplier = request.form.get('supplier')
+        products = request.form.get('products')
+        print(products)
+    
     return render_template('orders/create.html', title='GDgoodZ Trading - Orders', top_heading_txt='Orders - Create',
                            secondary_heading_txt='Use the form below to create and submit a new order!')

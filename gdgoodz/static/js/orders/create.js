@@ -1,5 +1,11 @@
 $(document).ready(function() {
 
+    var ids_arr = Array();
+    var products_arr = Array();
+    var quantities_arr = Array();
+    var skus_arr = Array();
+    var costs_per_unit_arr = Array();
+
     // Disable submit when enter pressed
     $(window).keydown(function(event) {
         if (event.keyCode == 13) {
@@ -17,7 +23,7 @@ $(document).ready(function() {
                 supplierName = value.name;
 
                 // Create an option element
-                var supplierOption = $('<option value="' + supplierId + '">' + supplierName + '</option>');
+                var supplierOption = $('<option value="' + supplierName + '">' + supplierName + '</option>');
 
                 // Append to the supplier select
                 $('#supplierSelect').append(supplierOption);
@@ -51,10 +57,21 @@ $(document).ready(function() {
 
                     var qty_li = $('<li></li>').append(qty_label).append(qty_input);
 
-                    var add_btn = $('<button type="button" class="btn btn-primary add-btn" style="width: 100%;">Add</button>');
+                    var add_btn = $('<button id="addBtn' + p_id + '" type="button" class="btn btn-primary add-btn" style="width: 100%;">Add</button>');
 
                     // Add button click event
                     $(add_btn).on('click', function() {
+                        if ($(qty_input).val() <= 0) {
+                            window.alert('You cannot add a product with no quantity!');
+                            return;
+                        }
+
+                        ids_arr.push(p_id);
+                        products_arr.push(p_name);
+                        quantities_arr.push($(qty_input).val());
+                        skus_arr.push(p_sku);
+                        costs_per_unit_arr.push(p_cost_per_unit);
+
                         var card = $('<div class="card bg-default mb-3" style="max-width: 18rem;"></div>');
 
                         var card_header = $('<div class="card-header text-white bg-primary">' + p_name + '</div>');
@@ -76,6 +93,22 @@ $(document).ready(function() {
                         $('#addedProductCards').append(card);
 
                         $(this).prop('disabled', true);
+
+                        // Remove button click event
+                        $(removeBtn).on('click', function() {
+                            // $('#addedProductCards').remove(card);
+
+                            var productCards = $('#addedProductCards .card');
+                            $.each(productCards, function(key, value) {
+                                var cTitle = $(this).find('.card-header').first();
+                                var title = $(cTitle).text();
+
+                                if (title == p_name) {
+                                    $(this).remove();
+                                    $('#addBtn' + p_id).prop('disabled', false);
+                                }
+                            });
+                        });
                     });
 
                     product_ul.append(id_li);
