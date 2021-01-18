@@ -178,7 +178,15 @@ def delete(product_id):
 ''' Fetch JSON routes '''
 
 
+@bp.route('/products/fetchall')
+@login_required
+def fetchall():
+    products = controller.select_all_products()
+    return jsonify(products)
+
+
 @bp.route('/products/search/<search_term>')
+@login_required
 def search(search_term):
     products = controller.search(search_term)
     return jsonify(products)

@@ -22,4 +22,10 @@
 
 .card {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    overflow-y: scroll;
+}
+
+.card-body {
+    font-size: 12px;
+    height: 225px;
 }

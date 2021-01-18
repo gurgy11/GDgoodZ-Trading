@@ -82,6 +82,7 @@ def delete(supplier_id):
 
 
 @bp.route('/suppliers/fetchall')
+@login_required
 def fetchall():
     suppliers = controller.select_all_records()
     supplier_dicts = []

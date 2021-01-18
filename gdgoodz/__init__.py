@@ -53,4 +53,8 @@ def create_app(test_config=None):
     app.register_blueprint(orders_bp)
     app.add_url_rule('/', endpoint='orders')
     
+    from gdgoodz.modules.developer import developer_bp
+    app.register_blueprint(developer_bp)
+    app.add_url_rule('/', endpoint='developer')
+    
     return app
